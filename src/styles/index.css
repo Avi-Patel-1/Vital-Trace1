@@ -1,0 +1,267 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-display: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Georgia, serif;
+  --font-body: "Avenir Next", "Segoe UI", "Trebuchet MS", sans-serif;
+  --font-mono: "SFMono-Regular", "IBM Plex Mono", "Menlo", monospace;
+  --light-neutral: #ffffff;
+  --deep-rose: #853953;
+  --signal-red: #d24c74;
+  --signal-cyan: #ffffff;
+  --signal-sky: #d24c74;
+  --signal-amber: #f3a873;
+  --signal-green: #8bc8a0;
+  --dark-plum: #612d53;
+  --charcoal: #000000;
+  --charcoal-deep: #05070a;
+  --charcoal-lift: #081018;
+  --charcoal-surface: #0e161d;
+  --page-bg: #000000;
+  --page-text: var(--light-neutral);
+  --panel: rgba(8, 12, 17, 0.88);
+  --panel-border: rgba(255, 255, 255, 0.12);
+  --control-bg: rgba(0, 0, 0, 0.36);
+  --cursor-x: 50vw;
+  --cursor-y: 20vh;
+  --cursor-rx: 0.5;
+  --cursor-ry: 0.2;
+}
+
+html[data-theme="paper"] {
+  --page-bg: #020406;
+  --page-text: var(--light-neutral);
+  --panel: rgba(10, 14, 19, 0.9);
+  --panel-border: rgba(255, 255, 255, 0.14);
+  --control-bg: rgba(0, 0, 0, 0.38);
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--page-bg);
+  color: var(--page-text);
+  font-family: var(--font-body);
+  text-rendering: optimizeLegibility;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+::selection {
+  background: rgba(133, 57, 83, 0.3);
+  color: #ffffff;
+}
+
+@layer utilities {
+  .font-display {
+    font-family: var(--font-display);
+  }
+
+  .font-mono {
+    font-family: var(--font-mono);
+  }
+}
+
+@layer components {
+  .panel-shell {
+    @apply rounded-[1.8rem] border p-5 shadow-[0_22px_70px_rgba(0,0,0,0.22)] backdrop-blur-xl sm:p-6;
+    background:
+      radial-gradient(
+        520px circle at calc(var(--cursor-rx) * 100%) calc(var(--cursor-ry) * 100%),
+        rgba(210, 76, 116, 0.08),
+        transparent 48%
+      ),
+      radial-gradient(
+        420px circle at 82% 16%,
+        rgba(255, 255, 255, 0.04),
+        transparent 42%
+      ),
+      linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.014)),
+      var(--panel);
+    border-color: var(--panel-border);
+  }
+
+  .primary-button {
+    @apply inline-flex items-center justify-center rounded-full px-5 py-3 text-sm uppercase tracking-[0.22em] text-white transition duration-300 hover:-translate-y-0.5;
+    background: linear-gradient(135deg, rgba(210, 76, 116, 0.96), rgba(133, 57, 83, 0.94));
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    box-shadow: 0 18px 40px rgba(25, 7, 13, 0.4);
+  }
+
+  .chip-button {
+    @apply inline-flex items-center justify-center rounded-full px-4 py-2.5 text-sm uppercase tracking-[0.18em] transition duration-300 hover:-translate-y-0.5;
+    color: rgba(255, 255, 255, 0.84);
+    background: rgba(0, 0, 0, 0.34);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+  }
+
+  .control-field {
+    @apply flex flex-col gap-2 rounded-[1.2rem] border p-3 text-sm;
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.74);
+  }
+
+  .control-field span:first-child {
+    @apply text-[0.7rem] uppercase tracking-[0.22em];
+    color: rgba(255, 255, 255, 0.52);
+  }
+
+  .control-value {
+    @apply text-right text-xs uppercase tracking-[0.18em] text-white/40;
+  }
+
+  .control-input {
+    @apply min-h-[2.8rem] rounded-[0.95rem] border px-3 py-2 text-sm text-white outline-none transition focus:border-white/20;
+    background: var(--control-bg);
+    border-color: rgba(255, 255, 255, 0.12);
+  }
+
+  .control-input::placeholder {
+    color: rgba(255, 255, 255, 0.42);
+  }
+
+  .toggle-field {
+    @apply flex items-center gap-3 rounded-[1rem] border px-3 py-3;
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.12);
+  }
+
+  .toggle-field input {
+    accent-color: var(--deep-rose);
+  }
+
+  .upload-dropzone {
+    @apply block cursor-pointer rounded-[1.6rem] border border-dashed p-5 transition;
+    border-color: rgba(210, 76, 116, 0.28);
+    background: rgba(255, 255, 255, 0.03);
+  }
+
+  .upload-dropzone:hover {
+    background: rgba(210, 76, 116, 0.08);
+  }
+
+  .section-shell {
+    @apply relative overflow-hidden rounded-[2.2rem] border border-white/10;
+    background:
+      radial-gradient(
+        260px circle at calc(var(--cursor-rx) * 100%) calc(var(--cursor-ry) * 100%),
+        rgba(255, 255, 255, 0.06),
+        transparent 38%
+      ),
+      radial-gradient(
+        640px circle at calc(var(--cursor-rx) * 100%) calc(var(--cursor-ry) * 100%),
+        rgba(210, 76, 116, 0.12),
+        transparent 52%
+      ),
+      radial-gradient(
+        460px circle at 78% 18%,
+        rgba(255, 255, 255, 0.05),
+        transparent 52%
+      ),
+      linear-gradient(145deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.016));
+    box-shadow: 0 28px 110px rgba(0, 0, 0, 0.26);
+    backdrop-filter: blur(20px);
+  }
+
+  .action-tile {
+    @apply flex flex-col rounded-[1.35rem] border border-white/10 bg-white/[0.03] px-4 py-4 transition duration-300 hover:-translate-y-0.5 hover:border-white/20 hover:bg-white/[0.05];
+  }
+
+  .action-title {
+    @apply text-[0.72rem] uppercase tracking-[0.24em] text-white/[0.58];
+  }
+
+  .action-copy {
+    @apply mt-2 text-base text-white;
+  }
+
+  .tool-group {
+    @apply flex min-h-[88px] flex-col justify-between rounded-[1.35rem] border border-white/10 bg-white/[0.03] px-4 py-4 text-left transition duration-300 hover:-translate-y-0.5 hover:border-white/20 hover:bg-white/[0.05];
+  }
+
+  .tool-label {
+    @apply text-[0.72rem] uppercase tracking-[0.24em] text-white/[0.56];
+  }
+
+  .tool-copy {
+    @apply mt-2 text-sm leading-6 text-white/[0.7];
+  }
+
+  .tool-group.is-active {
+    border-color: rgba(210, 76, 116, 0.3);
+    background:
+      radial-gradient(
+        400px circle at calc(var(--cursor-rx) * 100%) calc(var(--cursor-ry) * 100%),
+        rgba(210, 76, 116, 0.16),
+        transparent 54%
+      ),
+      radial-gradient(
+        320px circle at 78% 18%,
+        rgba(255, 255, 255, 0.03),
+        transparent 54%
+      ),
+      rgba(255, 255, 255, 0.05);
+  }
+
+  .signal-badge {
+    @apply inline-flex items-center justify-center rounded-full border px-3 py-2 text-xs uppercase tracking-[0.22em];
+    border-color: rgba(255, 255, 255, 0.16);
+    background: rgba(255, 255, 255, 0.03);
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  .scroll-cue {
+    @apply inline-flex items-center gap-3 rounded-full border px-4 py-3 text-xs uppercase tracking-[0.24em];
+    border-color: rgba(255, 255, 255, 0.14);
+    background: rgba(0, 0, 0, 0.32);
+    color: rgba(255, 255, 255, 0.72);
+  }
+}
+
+.signal-field {
+  background:
+    radial-gradient(
+      560px circle at calc(var(--cursor-rx) * 100%) calc(var(--cursor-ry) * 100%),
+      rgba(210, 76, 116, 0.1),
+      transparent 42%
+    ),
+    radial-gradient(circle at 76% 18%, rgba(255, 255, 255, 0.04), transparent 22%),
+    radial-gradient(circle at 24% 76%, rgba(255, 255, 255, 0.03), transparent 24%);
+}
+
+.signal-lines {
+  background-image:
+    radial-gradient(circle at calc(var(--cursor-rx) * 100%) 20%, rgba(255,255,255,0.05), transparent 22%),
+    repeating-linear-gradient(
+      116deg,
+      rgba(255, 255, 255, 0.018) 0,
+      rgba(255, 255, 255, 0.018) 2px,
+      transparent 2px,
+      transparent 110px
+    );
+  transform: translate3d(calc((var(--cursor-rx) - 0.5) * 20px), calc((var(--cursor-ry) - 0.5) * 14px), 0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
