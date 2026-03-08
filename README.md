@@ -70,5 +70,5 @@ docs/
 ```
 
 ## Screenshots
-
+- Need to Update (developer view)
 ![Vital Trace preview](./docs/screenshots/home-hero.png)
