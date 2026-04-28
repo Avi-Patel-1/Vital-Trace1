@@ -1,6 +1,6 @@
 # Vital Trace
 
-[vitaltrace.org](vitaltrace.org) 
+Copy this link into your browser for the live website hosted on Vercel! [vitaltrace.org](vitaltrace.org) 
 
 Vital Trace is a browser-based physiological signal review environment. It combines a user-friendly front end with a working analysis workspace for ECG, EMG, PPG, respiration, motion-derived traces, and synthetic signals.
 
